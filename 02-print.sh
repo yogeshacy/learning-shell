@@ -22,7 +22,7 @@ echo -e "Hello\t\tWorld"
 #MAGENTA  35
 #CYAN     36
 
-echo -e "\nColor\tCode\n"
+echo -e "\nColor\tCode"
 echo -e "\e[31mRED      31\e[0m"
 echo -e "\e[32mGREEN    32\e[0m"
 echo -e "\e[33mYELLOW   33\e[0m"
