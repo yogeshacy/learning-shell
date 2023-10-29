@@ -1,3 +1,8 @@
 #!/bin/bash
 
-echo -e "Hello world ...!"
+if [ abc == ABC ]
+then
+  echo Both are same
+else
+  echo Both are not same
+fi
