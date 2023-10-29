@@ -6,3 +6,5 @@ then
 else
   echo Both are not same
 fi
+
+# echo ABC | tr [:upper:][:lower:]
