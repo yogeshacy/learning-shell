@@ -1,7 +1,7 @@
 #!/bin/bash
 
-fruit=$1
-case fruit in
+fruit=1
+case $fruit in
   apple)
     echo 'Price = $1'
     fruit banana
