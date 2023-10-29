@@ -1,6 +1,6 @@
 #!/bin/bash
 
-fruit=$!
+fruit=$1
 case fruit in
   apple)
     echo 'Price = $1'
