@@ -1,0 +1,141 @@
+Git 
+
+It is version control tool 
+it is also called SCM (source code management) tools
+
+2 types of version controlling
+
+1.Centralized Version Controlling - contain 1 repository
+2.Distributed Version Controlling - contain 2 repository
+
+project file -> staging area -> move local repository
+
+Types of Git files
+
+Untracked files - default develop files 
+Staged files - 
+commited file -
+
+git init
+git status
+git config --global user.name "yogesh"
+git config --global user.email "yogeshacy@outlook.com"
+git config --global --list
+
+file move to staging area from untracked
+git add one.txt
+git add .
+
+file move staging area to loal repository 
+git commit -m "first commit"
+
+View the list of commit
+git log 
+git log --oneline
+
+latest commit is also called as head commit
+
+Branching
+
+developers created the branch based on the different functionality
+default branch is master
+
+git branch test --> create the new branch (test)
+git branch ----> view the list of branch
+git checkout test --> change into test branch
+
+before merging master branch shows only master commit logs
+child brach shows child commit & master commit logs	
+while merging create new commit
+
+Merge
+
+leanear order merged
+	
+git checkout master
+git merge test
+
+.gitignore
+
+vi .gitignore
+*.class
+:wq
+
+Rebase 
+
+it is fast forward merge
+its added the top of the merge
+add the latest version of master branch
+
+git checkout test
+
+git rebase master
+
+git checkout master
+
+git merge test
+
+git log
+
+Rearange 
+
+change the commit order 
+can not change the order of first commit
+
+git rebase -i HEAD~4
+
+edit the order 
+save it
+git log --oneline
+
+Squash
+
+remove the any commit
+can not squash the order of first commit
+
+git rebase -i HEAD~4
+
+replace pick to squash
+save it
+
+
+cherry pick
+
+selctively pickup the child commit to parent (master)
+
+git cherry-pick <child-commit-id> <child-commit-id> 
+
+
+git checkout test
+
+get the required child commmit 
+
+git checkout master
+
+git cherry-pick <child-commit-id> <child-commit-id> 
+
+its fast forward merge
+
+Amend
+
+it's modification of comitted existing file
+git commit --amend -m "a"
+
+file conflict
+it's override the same file in different branch 
+
+delete branch
+
+git branch
+
+git branch -d test
+
+previous version of source code 
+
+git reset --hard  <specific commit-id>
+
+github (Repository)
+
+git remote add origin https://github.com/yogeshacy/test_repo.git
+git branch -M main
+git push -u origin master

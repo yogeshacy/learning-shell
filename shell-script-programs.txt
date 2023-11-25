@@ -1,0 +1,609 @@
+shell script 
+interpreter
+
+cat /etc/shells
+
+hello.sh
+#!/bin/bash
+
+echo "Hello world"
+
+###
+system variable (represent capital letter) $BASH, $BASH_VARIABLE, $HOME
+user defined variable name
+name=devops
+echo courese name is $name
+
+#variable
+#not start number
+#it allow only (_)
+
+#read the variable
+echo "Enter name:"
+read name
+echo "the name is $name"
+
+####
+
+#read the variable
+echo "Enter names:"
+read name1 name2 name3
+echo "the name is $name1 $name1 $name1"
+
+####
+read -p "user name:" user_name
+read -sp "password:" password
+echo
+echo "username : $user_name"
+echo "password : $password"
+
+####
+#Array
+#read the variable
+echo "Enter names:"
+read -a name
+echo "the name is ${names[0]}, ${names[1]}"
+
+echo "Enter names:"
+read 
+echo "the name is :$REPLY"
+
+##argumnets
+
+echo $1 $2 $3 '> echo $1 $2 $3'
+
+args=("$@")
+
+echo ${args[1]} ${args[1]} ${args[1]}
+
+echo $@ #all arumnet print
+
+echo $# #number of agumnets
+
+#if condition
+
+#!/bin/bash
+if [ condition ]
+then
+  statement
+fi
+
+intsger comparation ["$a" -gt "$b"]
+-eq, -ne, -gt, -ge, -lt, -le
+
+if use symbole use (("$a" > "$b")) 
+
+string comparison
+=, ==, !=, < , >, 
+-z is null
+
+#!/bin/bash
+
+count=10
+
+if [ $count -eq 10 ]
+then
+  echo "condition is true"
+fi
+
+#!/bin/bash
+
+count=10
+
+if (( $count > 9 ))
+then
+  echo "condition is true"
+fi
+
+#!/bin/bash
+
+word=abc
+
+if [ $word == "abcd" ]
+then
+  echo "condition is true"
+fi
+
+#!/bin/bash
+
+word=a
+
+if [[ $0word == "a" ]]
+then
+  echo "condition a is true"
+elif [[ $word == "b" ]]
+then
+  echo "condition b is true"
+else
+  echo "condition false"
+fi
+
+##file test case
+#!/bin/bash
+
+echo -e "Enter the file name : \c"
+read file_name
+
+if [ -e $file_name ]  # -e find exist or not , -d find the dir , -b find block file , -c char block, -s file file empty or not, (-r, -w , -x) read write permission 
+then 
+  echo "$file_name found"
+else
+   echo "$file_namenot found"
+fi
+
+##uppend text
+#!/bin/bash
+
+echo -e "Enter the file name : \c"
+read file_name
+
+if [ -f $file_name ]  
+then 
+    if [ -w $file_name ]
+	then 
+	   echo "write some date . to quit press ctrl+d"
+	   cat >> $file_name
+	else
+	    echo "file not have write permission "
+	fi
+else
+   echo "$file_name not found"
+fi
+
+##AND operator
+
+#!/bin/bash
+age=25
+if [ "$age" -gt 18 ] && [ "$age" -lt 30 ]
+#if [ "$age" -gt 18 -a "$age" -lt 30 ]
+#if [[ "$age" -gt 18 && "$age" -lt 30 ]]
+then
+ echo "vaild age"
+ else
+ echo "ae not valid"
+fi
+
+##OR operator
+
+#!/bin/bash
+age=25
+if [ "$age" -gt 18 ] || [ "$age" -lt 30 ]
+#if [ "$age" -gt 18 -o "$age" -lt 30 ]
+#if [[ "$age" -gt 18 || "$age" -lt 30 ]]
+then
+ echo "vaild age"
+ else
+ echo "ae not valid"
+fi
+
+
+## arithmatic operator
+#!/bin/bash
+num1=25
+num2=5
+echo $(( num1 + num2 ))
+echo $(( num1 - num2 ))
+echo $(( num1 * num2 ))
+echo $(( num1 / num2 ))
+echo $(( num1 % num2 ))
+
+echo $(expr $num1 + $num2 )
+echo $(expr $num1 - $num2 )
+echo $(expr $num1 \* $num2 )
+echo $(expr $num1 / $num2 )
+echo $(expr $num1 % $num2 )
+
+
+## arithmatic operator
+#!/bin/bash
+num1=25.5
+num2=5
+
+echo "$num1+$num2" | bc  # bc used to desimal arthmatic tool
+echo "$num1-$num2"" | bc
+echo "$num1*$num2"" | bc
+echo "$num1/$num2"" | bc
+echo "scale=2;$num1/$num2"" | bc
+echo "$num1%$num2"" | bc
+
+num=27
+
+echo "scale=2;sqrt($num)" | bc -l # -l library fun
+echo "scale=2;sqrt3^3" | bc -l
+
+## case statement
+
+#!/bin/bash
+
+case expression in
+  patten1 )
+    statement 
+	;;
+  patten2 )
+    statement 
+	;;
+	...
+esac
+
+#!/bin/bash
+
+vehicle=$1
+
+case $vehicle in
+  "car" )
+    echo "this vehicle is  $vehicle"  
+	;;
+  "bus" )
+    echo "this vehicle is  $vehicle"  
+	;;
+  "truck" )
+    echo "this vehicle is  $vehicle"  
+	;;
+  "bike" )
+     echo "this vehicle is  $vehicle" 
+	;;
+  * )
+    echo "unknow vehicle"
+	;;	
+esac
+  
+
+#!/bin/bash
+
+echo -e "Enter charactor"
+read value
+
+case $value in
+  [A-Z] )
+    echo "this value is  $value is A t0 Z"  
+	;;
+  [a-z] )
+    echo "this vehicle is  $value is a to z"  
+	;;
+  [0-9] )
+    echo "this vehicle is  $value is 0 to 9"  
+	;;
+  ? )
+     echo "this vehicle is  $value is special charactor" 
+	;;
+  * )
+    echo "unknow input"
+	;;	
+esac
+
+
+##Arrays
+
+#!/bin/bash
+
+os=('windows' 'linux' 'fedora' 'debian')
+
+os[4]='mac' #add new value in array
+os[3]='ubunt' # update the value
+unset os[2] # remove the  value
+echo "${os[@]}"
+echo "${os[1]}"
+echo "${!os[@]}"
+echo "${#os[@]}"
+
+string=masniuxhi
+echo "${string[@]}"
+echo "${string[1]}"
+echo "${#string[1]}"
+
+Loops
+#while loop
+
+while [ condition ]
+do
+   statement
+done
+
+#!/bin/bash
+#while loop
+
+n=1
+
+while [ $n -le 10 ]
+#while (( $n <= 10 ))
+do
+  echo "$n"
+  n=$(( n+1 ))
+  # (( n++ ))
+done
+
+
+#!/bin/bash
+#while loop
+
+n=1
+
+while [ $n -le 10 ]
+#while (( $n <= 10 ))
+do
+  echo "$n"
+  n=$(( n+1 ))
+  # (( n++ ))
+  sleep 1
+  ##gnome-teminal &
+done
+
+
+#!/bin/bash
+#while loop read the contentant from file 
+
+while read p
+do
+  echo $p
+done < hello.sh
+
+#!/bin/bash
+#while loop read the contentant from file 
+
+cat hello.sh | while read p
+do
+  echo $p
+done
+
+#!/bin/bash
+#while loop read the contentant from file 
+
+while IFS= read -r line
+do
+  echo $line
+done < hello.sh
+
+#!/bin/bash
+#untill loops
+
+until [ condition ]
+do
+ statement
+done
+
+#!/bin/bash
+#untill loops
+n=1
+
+until [ $n -ge 10 ]
+do
+ echo $n
+ n=$(( n+1 ))
+done
+
+for loops
+
+for VARIABLE in 1 2 3 .. N
+do
+  statement
+done
+
+for VARIABLE in file1 file2 file3
+do
+  statement
+done
+
+for VARIABLE in $(linux-commands)
+do
+  statement
+done
+
+
+for (( EXP1; EXP2; EXP3 ))
+do
+  statement
+done
+
+#!/bin/bash
+#foor loop
+
+for i in 1 2 3 4 5
+do
+  echo $1
+done
+
+#!/bin/bash
+#foor loop
+
+for i in {1..10} #{START..END}
+do
+  echo $1
+done
+
+#!/bin/bash
+#foor loop
+
+echo ${BASH_VERSION}
+for i in {1..10..2} #{START..END..INCREMENT} #above 4th versin only support this vomdition
+do
+  echo $1
+done
+
+#!/bin/bash
+#foor loop
+
+for (( i=0; i<5; i++ ))
+do
+  echo $1
+done
+
+#!/bin/bash
+#foor loop with commmand 
+
+for command in ls pwd date
+do
+  echo"----$command----"
+  $command
+done
+
+#!/bin/bash
+#foor loop find the directory 
+
+for item in *
+do
+  if [ -d $item ]
+  then
+    echo $item
+  fi
+done
+
+##select 
+#!/bin/bash
+#select loop 
+
+select fruit in apple orange banana grapes
+do
+  echo"$fruit selected"
+done
+
+#!/bin/bash
+#select loop with case
+
+select fruit in apple orange banana grapes
+do
+  case $fruit in
+  apple )
+    echo"$fruit selected"
+  ;;
+  orange )
+    echo"$fruit selected"
+  ;;
+  banana )
+    echo"$fruit selected"
+  ;;
+  grapes )
+    echo"$fruit selected"
+  ;;
+  * )
+    echo"fruit is not in select list"
+  ;;
+done
+
+
+##Break and continue 
+#!/bin/bash
+#foor loop with break
+
+for (( i=0; i<5; i++ ))
+do
+  if [ $i -gt 5 ]
+  then
+     break
+  fi	 
+  echo $1
+done
+
+##Break and continue 
+#!/bin/bash
+#foor loop with continue
+
+for (( i=0; i<5; i++ ))
+do
+  if [ $i -eq 3 -o $1 -eq 6 ]
+  then
+     continue
+  fi	 
+  echo $1
+done
+
+##functions
+#!/bin/bash
+
+function name() {
+  commands
+}
+
+name() {
+  commands
+}
+
+#!/bin/bash
+
+function hello() {
+  echo "Hello function"
+}
+quit () {
+  exit
+}
+
+Hello
+quit
+echo "Thank you..."
+
+#!/bin/bash
+
+function print() {
+  echo $1
+}
+
+print hello
+print world
+
+
+#!/bin/bash
+
+function print() {
+  echo $1 $2
+}
+
+print hello world
+
+
+## Local variable
+#!/bin/bash
+
+function print() {
+  #name=$1 # name over ridden
+  local name=$1 # it can not be over ridden
+  echo "The name is $name : innner function"
+}
+name="Tom"
+echo "The name is $name : Before"
+print Jerry
+echo "The name is $name : after"
+
+##file check 
+
+#!/bin/bash
+
+usage() {
+ echo " provide arguument : "
+ echo "usage : $0 file_name"
+}
+is_file_exist() {
+  local file="$1"
+  [[ -f "$file" ]] && return 0 || return 1
+} #1 && con2
+
+[[ #$ -eq 0 ]] && usage
+
+if (is_file_exist "$1")
+then
+  echo "file found"
+else
+  echo "file not found"
+fi
+
+##Read only command
+
+#!/bin/bash
+
+var=10
+
+readonly var
+
+var=20
+
+echo "var --> $var"
+
+hello() {
+  echo "HEllo world ..."
+}
+
+readonly -f hello
+
+hello() {
+  echo "HEllo world again ..."
+}
+
+
